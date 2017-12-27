@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>{{title}}</title>
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+		<link href="/stylesheets/style.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		{{#logged}}
+		<script src="/javascripts/lib.js"></script>
+		<script>
+			const btcToUSD = {{btcToUSD}}
+
+			var socket = io()
+
+			socket.emit('getBalances')
+
+			socket.on('balances', balances)
+			socket.on('chart', chart)
+			socket.on('msg', code => eval(code))
+
+			setInterval(() => socket.emit('getBalances'), 30000)
+			setInterval(() => chartsRotation(), 10000)
+			setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
+		</script>
+		{{/logged}}
+		{{^logged}}
+		<script src="/javascripts/login.js"></script>
+		{{/logged}}
+	</head>
+	<body>
+		{{#logged}}<button type="button" class="submit right-corner" style="margin-top: 0" id="logout">Logout</button>{{/logged}}
+		<div class="container">
+		{{#logged}}
+			<div class="row">
+				<div class="offset-lg-3 col-lg-6 offset-lg-3">
+					<div class="box" id="stocks">
+						<h3>Current stocks</h3>
+						<table class="table table-sm" id="stockTable">
+						  <tr>
+						    <th>Currency</th>
+						    <th>Amount</th>
+						    <th>Cost</th>
+						    <th>Evol. USD</th>
+						    <th>Evol. BTC</th>
+						    <th>Action</th>
+						  </tr>
+						</table>
+						<table class="table table-sm" id="total">
+						  <tr>
+						    <th>Total Cost</th>
+						    <th>Estimated Price</th>
+						    <th>Total Evol.</th>
+						  </tr>
+						</table>
+					</div>
+				</div>
+
+				<div style="margin-top: 25px;" class="offset-2 col-8 offset-2" id="charts"></div>
+			</div>
+		{{/logged}}
+		{{^logged}}
+			<div class="row">
+				<div class="offset-3 col-6 offset-3">
+					<div class="box" id="login">
+						<form method="POST" id="submit" action="/">
+							<h3>Login credentials</h3>
+							<div class="alert alert-danger" id="error" style="display: none;"></div>
+							<label for="api">API Key</label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="api" id="api" placeholder="API Key" />
+							</div>
+
+							<label for="secret">API Secret</label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="secret" id="secret" placeholder="API Secret" />
+							</div>
+
+							<center><button type="submit" class="btn btn-primary submit">Submit</button></center>
+						</form>
+					</div>
+				</div>
+			</div>
+		{{/logged}}
+		</div>
+
+		<div class="modal fade " id="important-msg" tabindex="-1" role="dialog" aria-labelledby="important-msg-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="important-msg-label">Notification</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-text"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" id="close-modal" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="/javascripts/bootstrap.min.js"></script>
+		<script src="/bower_components/chart.js/dist/Chart.js"></script>
+	</body>
+<script>
+	$('body').fadeIn(1000)
+</script>
+</html>
+

@@ -1,0 +1,21 @@
+{
+  "name": "PoloniexRT",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "hjs": "~0.0.6",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2",
+    "request": "~2.81.0",
+    "request-promise": "~4.2.0",
+    "poloniex.js": "~0.0.7",
+    "socket.io": "~1.7.3"
+  }
+}
