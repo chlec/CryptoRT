@@ -3,11 +3,10 @@
 */
 const
 	getRandomColor = () => {
-	    var letters = '0123456789ABCDEF';
-	    var color = '#';
-	    for (var i = 0; i < 6; i++ ) {
-	        color += letters[Math.floor(Math.random() * 16)];
-	    }
+	    var letters = '0123456789ABCDEF'
+	    var color = '#'
+	    for (var i = 0; i < 6; i++ )
+	        color += letters[Math.floor(Math.random() * 16)]
 	    return color;
 	},
 
@@ -45,7 +44,6 @@ const
 var LISTEN_TICKER = false
 
 const balances = data => {
-	console.log('got', data)
 	resetDatas()
 		.then(_ => {
 			var table = document.getElementById("stockTable")

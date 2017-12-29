@@ -68,6 +68,11 @@
 						<form method="POST" id="submit" action="/">
 							<h3>Login credentials</h3>
 							<div class="alert alert-danger" id="error" style="display: none;"></div>
+							<label for="">Provider</label>
+							<div class="input-group">
+								<button type="button" class="form-control active" name="provider" id="polo">Poloniex</button>
+								<button type="button" class="form-control" name="provider" id="bittrex">Bittrex</button>
+							</div>
 							<label for="api">API Key</label>
 							<div class="input-group">
 								<input type="text" class="form-control" name="api" id="api" placeholder="API Key" />
@@ -78,7 +83,7 @@
 								<input type="text" class="form-control" name="secret" id="secret" placeholder="API Secret" />
 							</div>
 
-							<center><button type="submit" class="btn btn-primary submit">Submit</button></center>
+							<center><button type="submit" class="btn btn-primary submit">Log in</button></center>
 						</form>
 					</div>
 				</div>
@@ -91,7 +96,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="important-msg-label">Notification</h4>
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></but²ton>
                     </div>
                     <div class="modal-body">
                         <p id="modal-text"></p>
@@ -105,7 +110,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		<script src="/javascripts/bootstrap.min.js"></script>
-		<script src="/bower_components/chart.js/dist/Chart.js"></script>
+		<script src="/javascripts/Chart.js"></script>
 	</body>
 <script>
 	$('body').fadeIn(1000)

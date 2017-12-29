@@ -49,8 +49,12 @@ table {
 	border-width: 2px;
 }
 
-.form-control:focus {
+.form-control:focus:not(button) {
 	border-color: #026A58;
+}
+
+.form-control:focus:not(input) {
+	border-color: #6f9397;
 }
 
 .btn-secondary,
@@ -91,4 +95,19 @@ table {
 	position: absolute;
     top: 0px;
     right: 0px;
+}
+
+[name="provider"] {
+	color: #6f9397;
+	margin: auto;
+	opacity: 0.3;
+}
+
+[name="provider"]:focus,
+.active {
+	color: #fff;
+	background-color: #6f9397;
+	margin: auto;
+	opacity: 1;
+	font-weight: bold;
 }

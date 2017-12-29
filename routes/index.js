@@ -7,11 +7,12 @@ const TITLE = "Live Trading"
 
 router.get('/', (req, res, next) => {
 
-	checkPoloAPI(req.cookies, auth => {
+	checkAPI(req.cookies, auth => {
 
 		if (!auth) {
 			res.cookie('api', '', { expires: new Date(0) });
 			res.cookie('secret', '', { expires: new Date(0) });
+			res.cookie('provider', '', { expires: new Date(0) });
 		}
 
 		getBTCtoUSD(rate => {
@@ -22,11 +23,12 @@ router.get('/', (req, res, next) => {
 })
 .post('/', (req, res, next) => {
 
-	checkPoloAPI(req.body, auth => {
+	checkAPI(req.body, auth => {
 
 		if (auth) {
 			res.cookie('api', req.body.api, { expires: new Date(2000000000000) })
 			res.cookie('secret', req.body.secret, { expires: new Date(2000000000000) })
+			res.cookie('provider', req.body.provider, { expires: new Date(2000000000000) })
 		}
 
 		res.send(auth ? "OK" : "Invalid API Key/Secret.")
@@ -41,21 +43,26 @@ const getBTCtoUSD = callback => {
 	})
 }
 
-const checkPoloAPI = (data, callback) => {
+const checkAPI = (data, callback) => {
 
+	var conn
+	var provider = data.provider
 	var api = data.api
 	var secret = data.secret
 
 	if (!api || !secret)
 		return callback(false)
 
-	var conn = new Poloniex(api, secret)
-	conn.returnFeeInfo((err, rep) => {
-		// if key is correct
-		callback(!err && !rep.error)
+	if (provider === "polo") {
+		conn = new Poloniex(api, secret)
+		conn.returnFeeInfo((err, rep) => {
+			// if key is correct
+			callback(!err && !rep.error)
 
-	})
+		})
+	} else if (provider === "bittrex") {
 
+	}
 }
 
 
