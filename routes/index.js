@@ -51,7 +51,7 @@ const checkAPI = (data, callback) => {
 	var api = data.api
 	var secret = data.secret
 
-	if (!api || !secret)
+	if (!api || !secret || !provider)
 		return callback(false)
 
 	if (provider === "polo") {
