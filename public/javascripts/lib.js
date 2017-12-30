@@ -44,6 +44,7 @@ const
 var LISTEN_TICKER = false
 
 const balances = data => {
+	console.log(data)
 	resetDatas()
 		.then(_ => {
 			var table = document.getElementById("stockTable")

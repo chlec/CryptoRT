@@ -51,7 +51,7 @@
 						<table class="table table-sm" id="total">
 						  <tr>
 						    <th>Total Cost</th>
-						    <th>Estimated Price</th>
+						    <th>Current Estimated Price</th>
 						    <th>Total Evol.</th>
 						  </tr>
 						</table>
@@ -70,8 +70,12 @@
 							<div class="alert alert-danger" id="error" style="display: none;"></div>
 							<label for="">Provider</label>
 							<div class="input-group">
-								<button type="button" class="form-control active" name="provider" id="polo">Poloniex</button>
-								<button type="button" class="form-control" name="provider" id="bittrex">Bittrex</button>
+								<button type="button" class="form-control active" name="provider" id="polo" style="border-right: 0">
+									Poloniex
+								</button>
+								<button type="button" class="form-control" name="provider" id="bittrex" style="border-left: 0">
+									Bittrex
+								</button>
 							</div>
 							<label for="api">API Key</label>
 							<div class="input-group">
