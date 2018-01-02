@@ -21,7 +21,7 @@
 			socket.on('chart', chart)
 			socket.on('msg', code => eval(code))
 
-			setInterval(() => socket.emit('getBalances'), 30000)
+			setInterval(() => socket.emit('getBalances'), 5000)
 			setInterval(() => chartsRotation(), 10000)
 			setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
 		</script>
