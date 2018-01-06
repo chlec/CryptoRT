@@ -193,7 +193,7 @@ $(document).ready(function() {
 	socket.emit('live')
 	setInterval(() => socket.emit('live'), 10000)
 	$.get('/api/getBalances', balances)
-	setInterval(() => $.get('/api/getBalances', balances), 10000)
+	setInterval(() => $.get('/api/getBalances', balances), 5000)
 	setInterval(() => chartsRotation(), 10000)
 	setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
 
