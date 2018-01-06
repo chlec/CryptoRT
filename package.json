@@ -1,6 +1,6 @@
 {
   "name": "PoloniexRT",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "start": "node polo"
@@ -16,7 +16,7 @@
     "request": "~2.81.0",
     "request-promise": "~4.2.0",
     "poloniex.js": "~0.0.7",
-    "socket.io": "~1.7.3",
+    "socket.io": "~2.0.4",
     "node.bittrex.api": "~1.0.0"
   }
 }
