@@ -174,7 +174,7 @@ function resetDatas() {
 $(document).ready(() => {
 
 	$.get('/api/getBalances', balances)
-	setInterval(() => $.get('/api/getBalances', balances), 10000)
+	setInterval(() => $.get('/api/getBalances', balances), 5000)
 	setInterval(() => chartsRotation(), 10000)
 	setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
 
