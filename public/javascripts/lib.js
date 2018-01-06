@@ -41,8 +41,6 @@ const
 * sio handle functions
 */
 
-var LISTEN_TICKER = false
-
 const balances = data => {
 	console.log(data)
 	resetDatas()
@@ -82,17 +80,12 @@ const balances = data => {
 						c1 = entre.insertCell(0),
 						c2 = entre.insertCell(1),
 						c3 = entre.insertCell(2)
-						totalCostEstimed(data, (estimated, cost) => {
-							c1.innerHTML = "$" + cost
-							c2.innerHTML = "$" + estimated
-							let totalVariation = round((estimated - cost) / cost * 100, 2)
-							c3.innerHTML = totalVariation > 0 ? c.green(totalVariation + "%") : c.red(totalVariation + "%")
-						})
-
-					if (!LISTEN_TICKER) {
-						//socket.emit("live", [cur, data[cur]])
-						LISTEN_TICKER = true
-					}
+					totalCostEstimed(data, (estimated, cost) => {
+						c1.innerHTML = "$" + cost
+						c2.innerHTML = "$" + estimated
+						let totalVariation = round((estimated - cost) / cost * 100, 2)
+						c3.innerHTML = totalVariation > 0 ? c.green(totalVariation + "%") : c.red(totalVariation + "%")
+					})
 				}
 			}
 		})
@@ -171,8 +164,34 @@ function resetDatas() {
 	})
 }
 
-$(document).ready(() => {
+function liveData(datas) {
+	var total = $("#topcoins")[0]
 
+	$("#topcoins tr").each((_, e) => e.remove())
+
+	for (let coin in datas) {
+		var data = datas[coin]
+		var variation = parseFloat(data[1])
+
+		var entre = total.insertRow(-1)
+		var c1 = entre.insertCell(0)
+		var c2 = entre.insertCell(1)
+		var c3 = entre.insertCell(2)
+
+		c1.innerHTML = coin
+		c2.innerHTML = round(data[0], 2)
+		c3.innerHTML = variation > 0 ? c.green(variation + "%") : c.red(variation + "%")
+	}
+}
+
+$(document).ready(function() {
+
+	var socket = io()
+
+	socket.on('live', liveData)
+
+	socket.emit('live')
+	setInterval(() => socket.emit('live'), 10000)
 	$.get('/api/getBalances', balances)
 	setInterval(() => $.get('/api/getBalances', balances), 10000)
 	setInterval(() => chartsRotation(), 10000)

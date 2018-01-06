@@ -9,6 +9,7 @@
 		<link href="/stylesheets/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		{{#logged}}
+		<script src="/socket.io/socket.io.js"></script>
 		<script src="/javascripts/lib.js"></script>
 		<script>
 			const btcToUSD = {{btcToUSD}}
@@ -23,30 +24,39 @@
 		<div class="container">
 		{{#logged}}
 			<div class="row">
-				<div class="offset-lg-3 col-lg-6 offset-lg-3">
-					<div class="box" id="stocks">
-						<h3>Current stocks</h3>
-						<table class="table table-sm" id="stockTable">
-						  <tr>
-						    <th>Currency</th>
-						    <th>Amount</th>
-						    <th>Cost</th>
-						    <th>Evol. USD</th>
-						    <th>Evol. BTC</th>
-						    <th>Action</th>
-						  </tr>
-						</table>
-						<table class="table table-sm" id="total">
-						  <tr>
-						    <th>Total Cost</th>
-						    <th>Current Estimated Price</th>
-						    <th>Total Evol.</th>
-						  </tr>
+				<div class="col-md-3" style="margin-left: -86px; margin-right: 86px;">
+					<div class="box">
+						<h3>Top 15 Volume Coins</h3>
+						<table class="table table-sm" id="topcoins" style="font-size: 13px;">
 						</table>
 					</div>
 				</div>
+				<div class="col-md-9">
+					<div class="col-lg-12">
+						<div class="box" id="stocks">
+							<h3>Current stocks</h3>
+							<table class="table table-sm" id="stockTable">
+							  <tr>
+							    <th>Currency</th>
+							    <th>Amount</th>
+							    <th>Cost</th>
+							    <th>Evol. USD</th>
+							    <th>Evol. BTC</th>
+							    <th>Action</th>
+							  </tr>
+							</table>
+							<table class="table table-sm" id="total">
+							  <tr>
+							    <th>Total Cost</th>
+							    <th>Current Estimated Price</th>
+							    <th>Total Evol.</th>
+							  </tr>
+							</table>
+						</div>
+					</div>
 
-				<div style="margin-top: 25px;" class="offset-2 col-8 offset-2" id="charts"></div>
+					<div style="margin-top: 25px;" class="col-lg-12" id="charts"></div>
+					</div>
 			</div>
 		{{/logged}}
 		{{^logged}}

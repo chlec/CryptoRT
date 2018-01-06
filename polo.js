@@ -34,12 +34,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-/* SOCKET.IO NO LONGER USED DUE TO SOME ISSUE BY EMITTING WITH CLASS.
-
-//const iohandle = require('./lib/io');
-//const io = require('socket.io').listen(server);
-//io.on('connection', iohandle);
-*/
+const iohandle = require('./lib/io');
+const io = require('socket.io').listen(server);
+io.on('connection', iohandle);
 
 server.listen(3000, function() {
 	console.log("Server listening on port 3000")
