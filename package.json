@@ -16,7 +16,6 @@
     "request": "~2.81.0",
     "request-promise": "~4.2.0",
     "poloniex.js": "~0.0.7",
-    "socket.io": "~2.0.4",
     "node.bittrex.api": "~1.0.0"
   }
 }

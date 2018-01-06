@@ -8,23 +8,10 @@
 		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 		<link href="/stylesheets/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script src="/socket.io/socket.io.js"></script>
 		{{#logged}}
 		<script src="/javascripts/lib.js"></script>
 		<script>
 			const btcToUSD = {{btcToUSD}}
-
-			var socket = io()
-
-			socket.emit('getBalances')
-
-			socket.on('balances', balances)
-			socket.on('chart', chart)
-			socket.on('msg', code => eval(code))
-
-			setInterval(() => socket.emit('getBalances'), 5000)
-			setInterval(() => chartsRotation(), 10000)
-			setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
 		</script>
 		{{/logged}}
 		{{^logged}}

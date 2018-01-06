@@ -73,7 +73,7 @@ const balances = data => {
 
 				//check if chart exist, if not we request one
 				if ($('#'+cur).length == 0)
-					socket.emit('getCharts', [cur, data[cur][2]])
+					$.post('/api/getCharts', { cur: cur, price: data[cur][2]}, chart)
 
 				//write total
 				if ($("#stockTable tr").length == Object.keys(data).length + 1) {
@@ -90,7 +90,7 @@ const balances = data => {
 						})
 
 					if (!LISTEN_TICKER) {
-						socket.emit("live", [cur, data[cur]])
+						//socket.emit("live", [cur, data[cur]])
 						LISTEN_TICKER = true
 					}
 				}
@@ -100,7 +100,12 @@ const balances = data => {
 
 function sell(currency) {
 	if (confirm(`Do you wanna sell all your ${currency}?`))
-		socket.emit("sell", currency)
+		$.post('/api/sell', { currency: currency }, res => {
+			if (res.error)
+				dsp(`Error: #${res.error}`, "error")
+			else
+				dsp(`Order #${res.order} has been created.`, "success")
+		})
 }
 
 const chart = rep => {
@@ -127,7 +132,7 @@ const chart = rep => {
 	//5 minutes -> 1000 * 60 * 5
 	setTimeout(() => {
 		$('#'+currency).remove()
-		socket.emit('getCharts', [currency, boughtPrice])
+		$.post('/api/getCharts', { cur: currency, price: boughtPrice}, chart)
 	}, 1000 * 60 * 5)
 }
 
@@ -167,6 +172,12 @@ function resetDatas() {
 }
 
 $(document).ready(() => {
+
+	$.get('/api/getBalances', balances)
+	setInterval(() => $.get('/api/getBalances', balances), 10000)
+	setInterval(() => chartsRotation(), 10000)
+	setTimeout(() => location.reload(), 30 * 60 * 1000) //refresh page in 30 min to get new btc price
+
 	$("#logout").on("click", () => {
 
 		var cookies = document.cookie.split(";")

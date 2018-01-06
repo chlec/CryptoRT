@@ -12,7 +12,7 @@ $(window).on('load', () => {
 		var formData = $("#submit").serialize()
 		formData += "&provider=" + $('[name="provider"].active').attr('id')
 
-		$.post('/', formData, function(resp) {
+		$.post('/login', formData, function(resp) {
 
             if (resp === "OK") {
 		        $('body').fadeOut(1000, function(){

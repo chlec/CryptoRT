@@ -22,7 +22,7 @@ router
 		})
 				 
 	})
-	.post('/', (req, res, next) => {
+	.post('/login', (req, res, next) => {
 
 		checkAPI(req.body, auth => {
 
@@ -67,7 +67,7 @@ const checkAPI = (data, callback) => {
 			'apikey': api,
 			'apisecret': secret
 		})
-		bittrex.getbalance({ currency : 'BTC' }, function( data, err ) {
+		bittrex.getbalance({ currency: 'BTC' }, function(data, err) {
 			callback(!err && data.success)
 		})
 	}
