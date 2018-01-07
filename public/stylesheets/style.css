@@ -111,3 +111,17 @@ table th {
 	opacity: 1;
 	font-weight: bold;
 }
+
+.tips_box {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+@media only screen and (max-width: 977px) {
+	.tips_box {
+		display: none;
+	}
+}

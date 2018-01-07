@@ -21,17 +21,17 @@
 	</head>
 	<body>
 		{{#logged}}<button type="button" class="submit right-corner" style="margin-top: 0" id="logout">Logout</button>{{/logged}}
+		<div class="tips_box">
+			<div class="box">
+				<h3>Top 15 Volume Coins</h3>
+				<table class="table table-sm" id="topcoins" style="font-size: 13px;">
+				</table>
+			</div>
+		</div>
 		<div class="container">
 		{{#logged}}
 			<div class="row">
-				<div class="col-lg-3">
-					<div class="box">
-						<h3>Top 15 Volume Coins</h3>
-						<table class="table table-sm" id="topcoins" style="font-size: 13px;">
-						</table>
-					</div>
-				</div>
-				<div class="col-lg-9">
+				<div class="offset-lg-3 col-lg-9">
 					<div class="col-12">
 						<div class="box" id="stocks">
 							<h3>Current stocks</h3>
