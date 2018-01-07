@@ -42,7 +42,6 @@ const
 */
 
 const balances = data => {
-	console.log(data)
 	resetDatas()
 		.then(_ => {
 			var table = document.getElementById("stockTable")
@@ -136,7 +135,6 @@ const chart = rep => {
 
 			ctx.save();
 			ctx.beginPath();
-			console.log(currency, boughtPrice)
 			ctx.moveTo(xaxis.left, yaxis.getPixelForValue(boughtPrice, undefined));
 			ctx.strokeStyle = '#ff0000';
 			ctx.lineTo(xaxis.right, yaxis.getPixelForValue(boughtPrice, undefined));
