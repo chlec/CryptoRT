@@ -101,23 +101,61 @@ function sell(currency) {
 		})
 }
 
+function getColoursArr() {
+	var arr = []
+	var col1 = getRandomColor()
+	var col2 = getRandomColor()
+
+	for (var i = 1; i <= 48; i++)
+		arr.push(i % 2 ? col1 : col2)
+	return arr
+}
+
 const chart = rep => {
-	var	currency = rep[0],
-		raw = rep[1],
-		hoursList = rep[2],
-		boughtPrice = rep[3]
+	var	currency = rep[0]
+	var raw = rep[1]
+	var hoursList = rep[2]
+	var boughtPrice = rep[3]
+	var colours
+	var ctx
+
 	$("#charts").append('<canvas class="box" id="' + currency + '" width="400" height="300"></canvas>')
-	var ctx = document.getElementById(currency)
+
+	colours = getColoursArr()
+	ctx = document.getElementById(currency)
+
+	var originalLineDraw = Chart.controllers.bar.prototype.draw;
+	Chart.helpers.extend(Chart.controllers.bar.prototype, {
+		draw: function() {
+			originalLineDraw.apply(this, arguments);
+
+			var chart = this.chart;
+			var ctx = chart.chart.ctx;
+			var xaxis = chart.scales['x-axis-0'];
+			var yaxis = chart.scales['y-axis-0'];
+
+			ctx.save();
+			ctx.beginPath();
+			console.log(currency, boughtPrice)
+			ctx.moveTo(xaxis.left, yaxis.getPixelForValue(boughtPrice, undefined));
+			ctx.strokeStyle = '#ff0000';
+			ctx.lineTo(xaxis.right, yaxis.getPixelForValue(boughtPrice, undefined));
+			ctx.stroke();
+			ctx.restore();
+			ctx.textAlign = 'center';
+			ctx.fillText("Bought Price", xaxis.left - 35, yaxis.getPixelForValue(boughtPrice, undefined));
+		}
+	});
+
 	var newChart = new Chart(ctx, {
-	    type: 'line',
+	    type: 'bar',
 	    data: {
 	        labels: hoursList,
 	        datasets: [{
-	            label: currency + ' during last 24 hours (bought at ' + boughtPrice + ' BTC)',
+	            label: `${currency} during last 24 hours`,
 	            data: raw,
-	            borderColor: [
-	                getRandomColor()
-	            ],
+	            borderColor: colours,
+	            backgroundColor: colours,
 	            borderWidth: 1
 	        }]
 	    }
