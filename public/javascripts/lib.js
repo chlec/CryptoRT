@@ -187,11 +187,8 @@ function liveData(datas) {
 $(document).ready(function() {
 
 	var socket = io()
-
 	socket.on('live', liveData)
 
-	socket.emit('live')
-	setInterval(() => socket.emit('live'), 10000)
 	$.get('/api/getBalances', balances)
 	setInterval(() => $.get('/api/getBalances', balances), 5000)
 	setInterval(() => chartsRotation(), 10000)

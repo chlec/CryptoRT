@@ -10,15 +10,13 @@ router
 			? new Polo(cookies.api, cookies.secret)
 			: new Bittrex(cookies.api, cookies.secret)
 
-		API.checkApi(valid => {
-			if (valid)
-				API.getBalances()
-					.then(b => API.getTrades(b))
-					.then(arr => API.formatBalances(arr))
-					.then(balances => res.json(balances))
-			else
-				res.json({error: true})
-		})
+		if (cookies.api && cookies.secret && cookies.provider)
+			API.getBalances()
+				.then(b => API.getTrades(b))
+				.then(arr => API.formatBalances(arr))
+				.then(balances => res.json(balances))
+		else
+			res.json({error: true})
 	})
 
 	.post('/getCharts', (req, res) => {

@@ -24,15 +24,15 @@
 		<div class="container">
 		{{#logged}}
 			<div class="row">
-				<div class="col-md-3" style="margin-left: -86px; margin-right: 86px;">
+				<div class="col-lg-3">
 					<div class="box">
 						<h3>Top 15 Volume Coins</h3>
 						<table class="table table-sm" id="topcoins" style="font-size: 13px;">
 						</table>
 					</div>
 				</div>
-				<div class="col-md-9">
-					<div class="col-lg-12">
+				<div class="col-lg-9">
+					<div class="col-12">
 						<div class="box" id="stocks">
 							<h3>Current stocks</h3>
 							<table class="table table-sm" id="stockTable">
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 
-					<div style="margin-top: 25px;" class="col-lg-12" id="charts"></div>
+					<div style="margin-top: 25px;" class="col-12" id="charts"></div>
 					</div>
 			</div>
 		{{/logged}}
