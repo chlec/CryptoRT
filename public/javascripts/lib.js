@@ -114,6 +114,7 @@ const chart = rep => {
 	var	currency = rep[0]
 	var raw = rep[1]
 	var hoursList = rep[2]
+	console.log(hoursList)
 	var boughtPrice = rep[3]
 	var colours
 	var ctx
