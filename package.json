@@ -1,9 +1,8 @@
 {
-  "name": "PoloniexRT",
+  "name": "CryptoRT",
   "version": "0.2.2",
-  "private": true,
   "scripts": {
-    "start": "node polo"
+    "start": "node app"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
