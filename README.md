@@ -2,7 +2,7 @@
 
 A simple web panel to see your stocks of cryptocurrencies in realtime using APIs. Bittrex and Poloniex supported.
 
-Built with Node.js using ExpressJS.
+Built with Node.js using ExpressJS. Front-end build with jQuery, Chart.js and pure JavaScript.
 
 You can see your stocks, evolution in USD, in BTC, percent of change, and you can sell your coin instantly with the latest price.
 
